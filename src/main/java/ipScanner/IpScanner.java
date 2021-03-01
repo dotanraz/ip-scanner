@@ -1,4 +1,4 @@
-package networkMonitor;
+package ipScanner;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -8,10 +8,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class NetworkScanner {
+public class IpScanner {
 
     public static void main(String[] args) {
-        ConcurrentSkipListSet<String> networkIps = networkScanner("192.168.1.0", 254);
+        ConcurrentSkipListSet<String> networkIps = scan("192.168.1.0", 254);
         System.out.println("Devices connected to the network:");
         networkIps.forEach(ip -> System.out.println(ip));
     }
@@ -22,7 +22,7 @@ public class NetworkScanner {
      * @param numOfIps e.g: 254
      * @return
      */
-    public static ConcurrentSkipListSet<String> networkScanner(String firstIpInTheNetwork, int numOfIps) {
+    public static ConcurrentSkipListSet<String> scan(String firstIpInTheNetwork, int numOfIps) {
         ExecutorService executorService = Executors.newFixedThreadPool(20);
         final String networkId = firstIpInTheNetwork.substring(0, firstIpInTheNetwork.length() - 1);
         ConcurrentSkipListSet<String> ipsSet = new ConcurrentSkipListSet();
